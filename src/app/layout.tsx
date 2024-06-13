@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
-import ConvexClerkProvider from "../providers/ConvexClerkProvider";
+import ConvexClerkProvider from "@/providers/ConvexClerkProvider";
+import AudioProvider from "@/providers/AudioProvider";
+import { Toaster } from "@/components/ui/toaster";
 
-const inter = Inter({ subsets: ["latin"] });
+const manrope = Manrope({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Ai-Podcaster",
@@ -20,8 +22,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <ConvexClerkProvider>{children}</ConvexClerkProvider>
+      <body className={manrope.className}>
+        <ConvexClerkProvider>
+          <AudioProvider>
+            {children}
+            <Toaster />
+          </AudioProvider>
+        </ConvexClerkProvider>
       </body>
     </html>
   );
